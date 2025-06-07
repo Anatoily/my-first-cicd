@@ -186,8 +186,8 @@
                 "text": "Аутентификация"
               },
               "body": {
-                "stroke": "#333333",
-                "strokeWidth": 1.5,
+                "stroke": "red",
+                "strokeWidth": 2.5,
                 "strokeDasharray": null
               }
             },
@@ -283,12 +283,73 @@
               "description": "",
               "outOfScope": false,
               "reasonOutOfScope": "",
-              "hasOpenThreats": false,
+              "hasOpenThreats": true,
               "handlesCardPayment": false,
               "handlesGoodsOrServices": false,
               "isWebApplication": false,
               "privilegeLevel": "",
-              "threats": []
+              "threats": [
+                {
+                  "id": "3c407cbc-5793-4d0d-9fe6-899a212d0470",
+                  "title": "Обход аутентификации через брутфорс",
+                  "status": "Open",
+                  "severity": "High",
+                  "type": "Spoofing",
+                  "description": "- слабая парольная политика\n- отсутствие ограничений на ввод пароля (rate limits)\n- утечки\n- отсутствие 2FA\n- робот\n\nD:8/R:7.5/E:5/A:6/D:8 = 34.5",
+                  "mitigation": "- парольная политика\n- rate limits - 10 не верных паролей 10 минут блокировка\n- мониторинг утечек\n- 2FA\n- капча ",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 3,
+                  "score": "34.5"
+                },
+                {
+                  "id": "aa27068d-c85e-4598-a7dd-210b5db65ef5",
+                  "title": "Обход аутентификации через инъекции",
+                  "status": "Open",
+                  "severity": "High",
+                  "type": "Spoofing",
+                  "description": "SQL-инъекции \n\nD:9/R:9/E:10/A:10/D:10 = 48",
+                  "mitigation": "Фильтрация SQL/команд, параметризованные запросы.",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 4,
+                  "score": "48"
+                },
+                {
+                  "id": "a2015d98-537f-46a5-8840-6aa38ab93ffc",
+                  "title": "Обход аутентификации через XSS",
+                  "status": "Open",
+                  "severity": "Critical",
+                  "type": "Spoofing",
+                  "description": "Кража авторизационных cookie пользователей\n\nD:10/R:7.5/E:10/A:6/D:7 = 40.5",
+                  "mitigation": "Экранирование текста\nВключение параметра “http only”\n",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 6,
+                  "score": "40.5"
+                },
+                {
+                  "id": "7bb94217-bbb9-4875-975b-ce32d51cf70a",
+                  "title": "Несанкционированный доступ к данным",
+                  "status": "Open",
+                  "severity": "High",
+                  "type": "Elevation of privilege",
+                  "description": "- получение доступа к административной УЗ\n- слабая парольная политика\n- отсутствие ограничений на ввод пароля (rate limits)\n- утечки\n- отсутствие 2FA\n\nD:9/R:7.5/E:5/A:8/D:8 = 37.5",
+                  "mitigation": "- парольная политика\n- rate limits - 10 не верных паролей 10 минут блокировка\n- мониторинг утечек\n- 2FA",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 8,
+                  "score": "37.5"
+                }
+              ],
+              "threatFrequency": {
+                "spoofing": 3,
+                "tampering": 0,
+                "repudiation": 0,
+                "informationDisclosure": 0,
+                "denialOfService": 0,
+                "elevationOfPrivilege": 3
+              }
             }
           },
           {
@@ -424,8 +485,8 @@
                 "text": "Загрузка выгрузка данных"
               },
               "body": {
-                "stroke": "#333333",
-                "strokeWidth": 1.5,
+                "stroke": "red",
+                "strokeWidth": 2.5,
                 "strokeDasharray": null
               }
             },
@@ -521,12 +582,34 @@
               "description": "",
               "outOfScope": false,
               "reasonOutOfScope": "",
-              "hasOpenThreats": false,
+              "hasOpenThreats": true,
               "handlesCardPayment": false,
               "handlesGoodsOrServices": false,
               "isWebApplication": false,
               "privilegeLevel": "",
-              "threats": []
+              "threats": [
+                {
+                  "id": "e6504cbd-8b67-421d-8973-5a3a56640dc6",
+                  "title": "Недоступность сервиса в результате DoS",
+                  "status": "Open",
+                  "severity": "Critical",
+                  "type": "Denial of service",
+                  "description": "Есть возможность грузить большие объемы файлов\n\nD:10/R:7.5/E:10/A:10/D:9 = 46.5",
+                  "mitigation": "Ограничение размера загружаемых файлов\nПроверка формата (Magic Bytes), разрешения\nОграничение запросов в секунду\n\n\n",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 7,
+                  "score": "46.5"
+                }
+              ],
+              "threatFrequency": {
+                "spoofing": 1,
+                "tampering": 0,
+                "repudiation": 0,
+                "informationDisclosure": 0,
+                "denialOfService": 1,
+                "elevationOfPrivilege": 0
+              }
             }
           },
           {
@@ -757,8 +840,8 @@
                 "text": "Просмотр баланса и истории"
               },
               "body": {
-                "stroke": "#333333",
-                "strokeWidth": 1.5,
+                "stroke": "red",
+                "strokeWidth": 2.5,
                 "strokeDasharray": null
               }
             },
@@ -854,12 +937,34 @@
               "description": "",
               "outOfScope": false,
               "reasonOutOfScope": "",
-              "hasOpenThreats": false,
+              "hasOpenThreats": true,
               "handlesCardPayment": false,
               "handlesGoodsOrServices": false,
               "isWebApplication": false,
               "privilegeLevel": "",
-              "threats": []
+              "threats": [
+                {
+                  "id": "fdfa3aa4-6d5e-4365-94e0-14ba0387c1db",
+                  "title": "Раскрытие информации о данных карт",
+                  "status": "Open",
+                  "severity": "Low",
+                  "type": "Tampering",
+                  "description": "Отсутствие маскирования при отображении\n\nD:5/R:5/E:2.5/A:6/D:1 = 19.5",
+                  "mitigation": "Одностороннее хэширование. Алгоритмы генерируют хеш-коды, чтобы преобразовать номер карты из читаемого формата в нечитаемый.",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 5,
+                  "score": "19.5"
+                }
+              ],
+              "threatFrequency": {
+                "spoofing": 0,
+                "tampering": 1,
+                "repudiation": 0,
+                "informationDisclosure": 0,
+                "denialOfService": 0,
+                "elevationOfPrivilege": 0
+              }
             }
           }
         ]
@@ -867,6 +972,6 @@
     ],
     "diagramTop": 2,
     "reviewer": "",
-    "threatTop": 2
+    "threatTop": 8
   }
 }
