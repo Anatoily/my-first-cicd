@@ -28,8 +28,8 @@
             },
             "visible": true,
             "shape": "trust-boundary-box",
-            "id": "cef82972-469e-4d80-8b1e-7cc44be7687c",
             "zIndex": -1,
+            "id": "cef82972-469e-4d80-8b1e-7cc44be7687c",
             "data": {
               "type": "tm.BoundaryBox",
               "name": "Trust Boundary",
@@ -59,6 +59,7 @@
             },
             "visible": true,
             "shape": "actor",
+            "zIndex": 1,
             "ports": {
               "groups": {
                 "top": {
@@ -142,7 +143,6 @@
               ]
             },
             "id": "10064f83-1b32-43f4-a329-a6ba6e262434",
-            "zIndex": 1,
             "data": {
               "type": "tm.Actor",
               "name": "Пользователь",
@@ -193,6 +193,7 @@
             },
             "visible": true,
             "shape": "process",
+            "zIndex": 2,
             "ports": {
               "groups": {
                 "top": {
@@ -276,7 +277,6 @@
               ]
             },
             "id": "880b211d-dcdc-449b-adca-60c82989523d",
-            "zIndex": 2,
             "data": {
               "type": "tm.Process",
               "name": "Аутентификация",
@@ -340,10 +340,23 @@
                   "new": false,
                   "number": 8,
                   "score": "37.5"
+                },
+                {
+                  "id": "b97f1ba6-e7e5-4dd4-80c4-552534dcc436",
+                  "title": "Раскрытие информации о стеке технологий",
+                  "status": "Open",
+                  "severity": "Critical",
+                  "type": "Spoofing",
+                  "description": "Целевые атаки на известные уязвимости (уязвимость в Apache Tomcat/9.0.29).\n\nD:8/R:7.5/E:10/A:6/D:9 = 40.5",
+                  "mitigation": "Поправить конфиг веб-сервера (ServerSignature Off).\nКастомизация заголовков ошибок (настройка страниц ошибок (404, 500 и т.д.), чтобы они не отображались).\nРегулярное обновление ПО.",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 10,
+                  "score": "40.5"
                 }
               ],
               "threatFrequency": {
-                "spoofing": 3,
+                "spoofing": 4,
                 "tampering": 0,
                 "repudiation": 0,
                 "informationDisclosure": 0,
@@ -366,13 +379,14 @@
                 "text": "Перевод денежных средств"
               },
               "body": {
-                "stroke": "#333333",
-                "strokeWidth": 1.5,
+                "stroke": "red",
+                "strokeWidth": 2.5,
                 "strokeDasharray": null
               }
             },
             "visible": true,
             "shape": "process",
+            "zIndex": 3,
             "ports": {
               "groups": {
                 "top": {
@@ -456,19 +470,40 @@
               ]
             },
             "id": "eb83e187-a1aa-4496-91c9-3b24b092b5e2",
-            "zIndex": 3,
             "data": {
               "type": "tm.Process",
               "name": "Перевод денежных средств",
               "description": "",
               "outOfScope": false,
               "reasonOutOfScope": "",
-              "hasOpenThreats": false,
+              "hasOpenThreats": true,
               "handlesCardPayment": false,
               "handlesGoodsOrServices": false,
               "isWebApplication": false,
               "privilegeLevel": "",
-              "threats": []
+              "threats": [
+                {
+                  "id": "7fb309a4-8064-47ca-9e04-1408a46c4dc5",
+                  "title": "Недостаточная проверка баланса при списании средств",
+                  "status": "Open",
+                  "severity": "Critical",
+                  "type": "Tampering",
+                  "description": "- перевод суммы денежных средств больше чем есть на счете (race condition)\n- недостаточный контроль доступа на уровне бизнес-логики (Broken Access Control / Business Logic Flaw)\nD:9/R:7.5/E:10/A:6/D:9 = ",
+                  "mitigation": "- корректировка бизнес-логики при списании/переводе.\n- использование транзакций (вся операция списания (проверка баланса + фактическое списание) должна выполняться в рамках одной атомарной транзакции базы данных).\n- проверка баланса должна выполняться только на стороне сервера.\n- тестирование",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 9,
+                  "score": "41.5"
+                }
+              ],
+              "threatFrequency": {
+                "spoofing": 0,
+                "tampering": 1,
+                "repudiation": 0,
+                "informationDisclosure": 0,
+                "denialOfService": 0,
+                "elevationOfPrivilege": 0
+              }
             }
           },
           {
@@ -492,6 +527,7 @@
             },
             "visible": true,
             "shape": "process",
+            "zIndex": 4,
             "ports": {
               "groups": {
                 "top": {
@@ -575,7 +611,6 @@
               ]
             },
             "id": "176d21fc-61b6-4987-a004-f19cfff25616",
-            "zIndex": 4,
             "data": {
               "type": "tm.Process",
               "name": "Загрузка выгрузка данных",
@@ -847,6 +882,7 @@
             },
             "visible": true,
             "shape": "process",
+            "zIndex": 11,
             "ports": {
               "groups": {
                 "top": {
@@ -930,7 +966,6 @@
               ]
             },
             "id": "99516fc2-dffd-4f98-9833-4e51a1c7cc1b",
-            "zIndex": 11,
             "data": {
               "type": "tm.Process",
               "name": "Просмотр баланса и истории",
@@ -972,6 +1007,6 @@
     ],
     "diagramTop": 2,
     "reviewer": "",
-    "threatTop": 8
+    "threatTop": 10
   }
 }
